@@ -1,0 +1,64 @@
+#app{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#inputTodo{
+  width: 200px;
+}
+
+#sort button{
+  width: 100px;
+}
+
+#app ul{
+  list-style: none;
+  padding: 0;
+}
+
+#app ul li:nth-child(even){
+  background-color: rgba(167, 255, 240, 0.664);
+}
+
+#app ul li:last-child{
+  border-bottom: solid 1px black;
+}
+
+#app ul li span.done{
+  text-decoration: line-through;
+}
+
+#app ul li{
+  display: flex;
+  width: 100%;
+  height: 80px;
+  border-top: solid 1px black;
+  line-height: 80px;
+  padding: 10px 0px;  
+}
+
+#title{
+  width: 300px;
+}
+
+#date{
+  width: 300px;
+  flex: row;
+  line-height: 40px;
+
+}
+
+#date p{
+  display: inline-block;
+  height: 30px;
+  margin: 0;  
+}
+
+#comment{
+  width: 300px; 
+  margin-right: 20px;
+}
+
+#count{
+  width: 200px;
+}

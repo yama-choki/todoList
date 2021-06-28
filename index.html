@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自作Todo List</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+
+
+      <h2>自作アプリに必要な項目
+        <span class="info">({{ remaining.length }}/{{ todos.length }})</span>
+        <button v-on:click="purge">一括削除</button>
+      </h2>
+      <p>ToDo
+        <input type="text" v-model="newItem" id="inputTodo">
+        <button v-on:click="addItem()">追加する</button>
+      </p>
+
+      <div id="sort">
+        <button v-on:click="">追加昇順</button>   
+        <button v-on:click="">追加降順</button>   
+        <button v-on:click="">進捗降順</button>   
+        <button v-on:click="">進捗昇順</button>
+        <button v-on:click="">期限昇順</button>
+        <button v-on:click="">期限降順</button>
+      </div>
+    </header>
+
+    <ul v-if="todos.length">
+      <li v-for="(todo,index) in todos"> 
+
+        <div id="title">
+          <input type="checkbox" v-model="todo.isDone" v-on:click="done(index)">
+          <span v-bind:class="{done: todo.isDone}">{{ todo.item }}</span>
+        </div>
+
+        <div id="date">
+          <p>追加日：{{ todo.date }}</p>
+          <p>期限：<input type="date" v-model="todo.limit"></p>                    
+        </div>
+
+        
+        <textarea id="comment" cols="30" rows="10"  v-model="todo.comment"></textarea>
+
+        <span id="count">
+          進捗レベル：
+           <button v-on:click="countUp(index)">+</button>
+           {{ todo.count }}
+           <button v-on:click="countDown(index)">-</button>
+          </span>  
+
+        <button v-on:click="deleteItem(index)" id="delete">削除する</button>
+      </li>
+    </ul>
+    <ul v-else>
+      <li>予定はありません</li>      
+    </ul>
+    <pre>{{ $data }}</pre>
+  </div>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
