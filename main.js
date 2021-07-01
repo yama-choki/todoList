@@ -3,6 +3,8 @@ const app = new Vue({
   data:{
     newItem:'',
     todos:[],
+    unfinishedTodos:[],
+    finishedTodos:[]
   },
   watch:{
     todos: {
@@ -27,7 +29,7 @@ const app = new Vue({
       }
       let todo = {
         item: this.newItem,
-        date: new Date().getFullYear() + "/" +  (new Date().getMonth() + 1 )+ "/"+ new Date().getDate(),
+        date: new Date().toLocaleString(),
         limit:"",
         isDone:false,
         comment:'',
@@ -74,7 +76,61 @@ const app = new Vue({
         return;
       }
       this.todos = this.remaining
-    }
+    },
+    sortDateRow:function(){
+      this.todos.sort(function(a, b) {
+        if(a.date < b.date){
+          return -1
+        } else {
+          return 1
+        }
+     });
+    },
+    sortDateReverse:function(){
+      this.todos.sort(function(a, b) {
+        if(a.date < b.date){
+          return 1
+        } else {
+          return -1
+        }
+     });
+    },
+    sortCountRow:function(){
+      this.todos.sort(function(a, b) {
+        if(a.count < b.count){
+          return -1
+        } else {
+          return 1
+        }
+     });
+    },
+    sortCountReverse:function(){
+      this.todos.sort(function(a, b) {
+        if(a.count < b.count){
+          return 1
+        } else {
+          return -1
+        }
+     });
+    },
+    sortLimitRow:function(){
+      this.todos.sort(function(a, b) {
+        if(a.limit < b.limit){
+          return -1
+        } else {
+          return 1
+        }
+     });
+    },
+    sortLimitReverse:function(){
+      this.todos.sort(function(a, b) {
+        if(a.limit < b.limit){
+          return 1
+        } else {
+          return -1
+        }
+     });
+    },
   },
   computed:{
     remaining: function(){

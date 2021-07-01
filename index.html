@@ -20,14 +20,20 @@
         <input type="text" v-model="newItem" id="inputTodo">
         <button v-on:click="addItem()">追加する</button>
       </p>
-
-      <div id="sort">
-        <button v-on:click="">追加昇順</button>   
-        <button v-on:click="">追加降順</button>   
-        <button v-on:click="">進捗降順</button>   
-        <button v-on:click="">進捗昇順</button>
-        <button v-on:click="">期限昇順</button>
-        <button v-on:click="">期限降順</button>
+      <div id="change">
+        <div id="sort">
+          <button v-on:click="sortDateRow">追加順</button>   
+          <button v-on:click="sortDateReverse">追加逆順</button>   
+          <button v-on:click="sortCountRow">進捗順</button>   
+          <button v-on:click="sortCountReverse">進捗逆順</button>
+          <button v-on:click="sortLimitRow">期限昇順</button>
+          <button v-on:click="sortLimitReverse">期限降順</button>
+        </div>
+        <div>
+          <button>完了済のみ</button>
+          <button>未完了のみ</button>
+          <button>全て表示</button>
+        </div>
       </div>
     </header>
 
