@@ -30,19 +30,22 @@
           <button v-on:click="sortLimitReverse">期限降順</button>
         </div>
         <div>
-          <button>完了済のみ</button>
-          <button>未完了のみ</button>
-          <button>全て表示</button>
+          <input type="radio" name="filter" id="" value="all" v-model="filter">
+          <label for="all">全ての項目</label>
+          <input type="radio" name="filter" id="" value="finished" v-model="filter">
+          <label for="finished">完了済みの項目</label>
+          <input type="radio" name="filter" id="" value="unfinished" v-model="filter">
+          <label for="unfinished">未完了の項目</label>
         </div>
       </div>
     </header>
 
-    <ul v-if="todos.length">
+    <ul v-show="todos.length && filter === 'all'">
       <li v-for="(todo,index) in todos"> 
 
         <div id="title">
           <input type="checkbox" v-model="todo.isDone" v-on:click="done(index)">
-          <span v-bind:class="{done: todo.isDone}">{{ todo.item }}</span>
+          <input type="text" v-bind:class="{done: todo.isDone}" v-model="todo.item">
         </div>
 
         <div id="date">
@@ -63,10 +66,62 @@
         <button v-on:click="deleteItem(index)" id="delete">削除する</button>
       </li>
     </ul>
-    <ul v-else>
+    <ul v-show="todos.length && filter === 'finished'">
+      <li v-for="(todo,index) in finishedTodos"> 
+
+        <div id="title">
+          <input type="checkbox" v-model="todo.isDone" v-on:click="done(index)">
+          <input type="text" v-bind:class="{done: todo.isDone}" v-model="todo.item">
+        </div>
+
+        <div id="date">
+          <p>追加日：{{ todo.date }}</p>
+          <p>期限：<input type="date" v-model="todo.limit"></p>                    
+        </div>
+
+        
+        <textarea id="comment" cols="30" rows="10"  v-model="todo.comment"></textarea>
+
+        <span id="count">
+          進捗レベル：
+           <button v-on:click="countUp(index)">+</button>
+           {{ todo.count }}
+           <button v-on:click="countDown(index)">-</button>
+          </span>  
+
+        <button v-on:click="deleteItem(index)" id="delete">削除する</button>
+      </li>
+    </ul>
+    <ul v-show="todos.length && filter === 'unfinished'">
+      <li v-for="(todo,index) in unfinishedTodos"> 
+
+        <div id="title">
+          <input type="checkbox" v-model="todo.isDone" v-on:click="done(index)">
+          <input type="text" v-bind:class="{done: todo.isDone}" v-model="todo.item">
+        </div>
+
+        <div id="date">
+          <p>追加日：{{ todo.date }}</p>
+          <p>期限：<input type="date" v-model="todo.limit"></p>                    
+        </div>
+
+        
+        <textarea id="comment" cols="30" rows="10"  v-model="todo.comment"></textarea>
+
+        <span id="count">
+          進捗レベル：
+           <button v-on:click="countUp(index)">+</button>
+           {{ todo.count }}
+           <button v-on:click="countDown(index)">-</button>
+          </span>  
+
+        <button v-on:click="deleteItem(index)" id="delete">削除する</button>
+      </li>
+    </ul>
+    <ul v-show="!todos.length ||!finishedTodos.length && filter === 'finished' || !unfinishedTodos.length && filter === 'unfinished'">
       <li>予定はありません</li>      
     </ul>
-    <pre>{{ $data }}</pre>
+   
   </div>
   
 

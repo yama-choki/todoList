@@ -16,7 +16,7 @@
   padding: 0;
 }
 
-#app ul li:nth-child(even){
+#app ul li:nth-child(odd){
   background-color: rgba(167, 255, 240, 0.664);
 }
 

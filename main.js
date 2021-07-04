@@ -2,9 +2,8 @@ const app = new Vue({
   el:'#app',
   data:{
     newItem:'',
+    filter:'all',
     todos:[],
-    unfinishedTodos:[],
-    finishedTodos:[]
   },
   watch:{
     todos: {
@@ -136,6 +135,24 @@ const app = new Vue({
     remaining: function(){
       return this.todos.filter(function(todo){
         return !todo.isDone
+      })
+    },
+    finishedTodos:function(){
+      return this.todos.filter( todo =>{
+        if(todo.isDone === true){
+          return true
+        } else {
+          return false
+        }
+      })
+    },
+    unfinishedTodos:function(){
+      return this.todos.filter( todo =>{
+        if(todo.isDone === true){
+          return false
+        } else {
+          return true
+        }
       })
     },
     
