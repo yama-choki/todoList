@@ -10,6 +10,15 @@ const app = new Vue({
       handler: function(){
         localStorage.setItem('todos', JSON.stringify(this.todos));
       },
+      finishedTodos:function(){
+        return this.todos.filter( todo =>{
+          if(todo.isDone === true){
+            return true
+          } else {
+            return false
+          }
+        })
+      },
       deep: true
     },
   },
@@ -39,33 +48,92 @@ const app = new Vue({
       this.newItem = ''
     },
     done: function(index){
-      if(this.todos[index].isDone === false){
-        return this.todos[index].count = 10
-      } else {
-        return this.todos[index].count = 9
+      if(this.filter === 'all'){
+        if(this.todos[index].isDone === false){
+          this.todos[index].count = 10
+        } else {
+          return this.todos[index].count = 9
+        }
+      } else if (this.filter === 'finidhed'){
+        if(this.finishedTodos[index].isDone === false){
+          this.finishedTodos[index].count = 10
+        } else {
+          return this.finishedTodos[index].count = 9
+        }
+      }  else if (this.filter === 'unfinidhed'){
+        if(this.unfinishedTodos[index].isDone === false){
+          this.unfinishedTodos[index].count = 10
+        } else {
+          return this.unfinishedTodos[index].count = 9
+        }
       }
     },
     countUp: function(index){
-      if(this.todos[index].count === 10){
-        return
-      }
-      if(this.todos[index].count === 9){
-        this.todos[index].isDone = true
+      if(this.filter === 'all'){
+        if(this.todos[index].count === 10){
+          return
+        }
+        if(this.todos[index].count === 9){
+          this.todos[index].count++
+          this.todos[index].isDone = true
+          return
+        } 
         this.todos[index].count++
-        return
-      } 
-      this.todos[index].count++
+      } else if(this.filter === 'finished'){
+        if(this.finishedTodos[index].count === 10){
+          return
+        }
+        if(this.finishedTodos[index].count === 9){
+          this.finishedTodos[index].count++
+          this.finishedTodos[index].isDone = true
+          return
+        } 
+        this.finishedTodos[index].count++
+      } else if(this.filter === 'unfinished'){
+        if(this.unfinishedTodos[index].count === 10){
+          return
+        }
+        if(this.unfinishedTodos[index].count === 9){
+          this.unfinishedTodos[index].count++
+          this.unfinishedTodos[index].isDone = true
+          return
+        } 
+        this.unfinishedTodos[index].count++
+      }
     },
     countDown: function(index){
-      if(this.todos[index].count === 0){
+    if(this.filter === 'all'){
+       if(this.todos[index].count === 0){
         return
       }
       if(this.todos[index].count === 10){
-        this.todos[index].isDone = false
         this.todos[index].count--
+        this.todos[index].isDone = false
         return
       }
       this.todos[index].count--
+    } else if (this.filter === 'finished'){
+      if(this.finishedTodos[index].count === 0){
+        return
+      }
+      if(this.finishedTodos[index].count === 10){
+        this.finishedTodos[index].count--
+        this.finishedTodos[index].isDone = false
+        return
+      }
+      this.finishedTodos[index].count--
+    } else if (this.filter === 'unfinished'){
+      if(this.unfinishedTodos[index].count === 0){
+        return
+      }
+      if(this.unfinishedTodos[index].count === 10){
+        this.unfinishedTodos[index].count--
+        this.unfinishedTodos[index].isDone = false
+        return
+      }
+      this.unfinishedTodos[index].count--
+    }
+
     },
     deleteItem: function(index){
       this.todos.splice(index,1)
@@ -154,7 +222,6 @@ const app = new Vue({
           return true
         }
       })
-    },
-    
+    },    
   }
 })

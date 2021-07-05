@@ -44,7 +44,7 @@
       <li v-for="(todo,index) in todos"> 
 
         <div id="title">
-          <input type="checkbox" v-model="todo.isDone" v-on:click="done(index)">
+          <input type="checkbox" v-model="todo.isDone" v-on:Click="done(index)">
           <input type="text" v-bind:class="{done: todo.isDone}" v-model="todo.item">
         </div>
 
@@ -57,7 +57,7 @@
         <textarea id="comment" cols="30" rows="10"  v-model="todo.comment"></textarea>
 
         <span id="count">
-          進捗レベル：
+          進捗度：
            <button v-on:click="countUp(index)">+</button>
            {{ todo.count }}
            <button v-on:click="countDown(index)">-</button>
@@ -83,7 +83,7 @@
         <textarea id="comment" cols="30" rows="10"  v-model="todo.comment"></textarea>
 
         <span id="count">
-          進捗レベル：
+          進捗度：
            <button v-on:click="countUp(index)">+</button>
            {{ todo.count }}
            <button v-on:click="countDown(index)">-</button>
@@ -109,7 +109,7 @@
         <textarea id="comment" cols="30" rows="10"  v-model="todo.comment"></textarea>
 
         <span id="count">
-          進捗レベル：
+          進捗度：
            <button v-on:click="countUp(index)">+</button>
            {{ todo.count }}
            <button v-on:click="countDown(index)">-</button>
@@ -121,7 +121,9 @@
     <ul v-show="!todos.length ||!finishedTodos.length && filter === 'finished' || !unfinishedTodos.length && filter === 'unfinished'">
       <li>予定はありません</li>      
     </ul>
-   
+    <pre>{{ $data }}</pre>
+    <pre>{{ finishedTodos }}</pre>
+    <pre>{{ unfinishedTodos }}</pre>   
   </div>
   
 
